@@ -1,0 +1,47 @@
+# Byte-compiled / Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables & credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Odoo specific (Logs, Config, Data)
+*.log
+odoo.log
+odoo-server.log
+odoo.conf
+filestore/
+sessions/
+*.dump
+*.sql
+
+# Docker data / Local mounts (jika ada local volume bind mount)
+data/
+pgdata/
+odoo_data/
+
+# IDE & Editor
+.idea/
+*.swp
+*.swo
+*~
+# Catatan: Jika ingin ignore .vscode tapi simpan settings.json:
+# .vscode/*
+# !.vscode/settings.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

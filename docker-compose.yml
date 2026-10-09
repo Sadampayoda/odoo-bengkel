@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:18.6
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    ports:
+      - "6544:5432"
+    volumes:
+      - odoo-db:/var/lib/postgresql
+  odoo:
+    image: odoo:20
+    command: odoo --http-interface=0.0.0.0
+    container_name: odoo
+    depends_on:
+      - db
+    ports:
+      - "8070:8069"
+    environment:
+      - HOST=db
+      - PORT=5432
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - odoo-web:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
+
+volumes:
+  odoo-db:
+  odoo-web:
