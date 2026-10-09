@@ -1,3 +1,4 @@
+import string
 from odoo import api, fields, models #type: ignore
 from odoo.exceptions import ValidationError #type: ignore
 
@@ -21,3 +22,10 @@ class OrderLine(models.Model):
     def _compute_subtotal(self):
         for line in self:
             line.subtotal = line.quantity * line.price_unit
+
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        for rec in self:
+            if rec.product_id:
+                rec.price_unit = rec.product_id.list_price
+

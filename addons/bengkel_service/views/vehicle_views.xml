@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_vehicle_list" model="ir.ui.view">
+        <field name="name">bengkel_service.vehicle.list</field>
+        <field name="model">bengkel_service.vehicle</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="plate"/>
+                <field name="name"/>
+                <field name="brand"/>
+                <field name="type"/>
+                <field name="year"/>
+                <field name="customer_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_vehicle_form" model="ir.ui.view">
+        <field name="name">bengkel_service.vehicle.form</field>
+        <field name="model">bengkel_service.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="plate"/>
+                            <field name="name"/>
+                            <field name="brand"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="color"/>
+                            <field name="year"/>
+                            <field name="customer_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Riwayat Servis">
+                            <field name="order_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_vehicle_search" model="ir.ui.view">
+        <field name="name">bengkel_service.vehicle.search</field>
+        <field name="model">bengkel_service.vehicle</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="plate"/>
+                <field name="name"/>
+                <field name="customer_id"/>
+                <group>
+                    <filter name="group_type" string="Jenis" context="{'group_by': 'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_vehicle" model="ir.actions.act_window">
+        <field name="name">Kendaraan</field>
+        <field name="res_model">bengkel_service.vehicle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

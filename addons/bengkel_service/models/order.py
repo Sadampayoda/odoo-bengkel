@@ -1,4 +1,5 @@
 from odoo import api, fields, models #type: ignore
+from odoo.exceptions import UserError #type: ignore
 
 
 
@@ -34,5 +35,23 @@ class Order(models.Model):
     def _compute_total(self):
         for rec in self:
             rec.total = sum(rec.line_ids.mapped('subtotal'))
+
+    def action_diagnosa(self):
+        self.write({'state': 'diagnosa'})
+
+    def action_proses(self):
+        for rec in self:
+            if not rec.mechanic_id:
+                raise UserError('Mekanik belum dipilih')
+        self.write({'state': 'proses'})
+
+    def action_done(self):
+        for rec in self:
+            if not rec.line_ids:
+                raise UserError('Item Pekerjaan belum diisi')
+        self.write({'state': 'done'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
 
 
